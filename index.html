@@ -43,7 +43,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Custom Styles & Glassmorphism */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #02150e;
@@ -80,40 +79,17 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .gold-border-gradient {
-            border-image: linear-gradient(to right, #d4af37, #7a5a12) 1;
-        }
-
         /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #02150e;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #124d36;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #d4af37;
-        }
-
-        /* Resin Shimmer Effect */
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        .resin-shimmer {
-            background: linear-gradient(90deg, rgba(212,175,55,0) 0%, rgba(212,175,55,0.2) 50%, rgba(212,175,55,0) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 4s infinite;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #02150e; }
+        ::-webkit-scrollbar-thumb { background: #124d36; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4af37; }
     </style>
 </head>
 <body class="bg-emerald-950 text-cream-100 antialiased selection:bg-bronze-500 selection:text-emerald-950">
 
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-bronze-500/20 px-4 lg:px-12 py-4 transition-all duration-300" id="navbar">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-bronze-500/20 px-4 lg:px-12 py-4 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
                 <div class="w-10 h-10 rounded-full border border-bronze-400/60 flex items-center justify-center bg-emerald-900/80 group-hover:border-bronze-400 transition-colors shadow-lg">
@@ -134,44 +110,45 @@
                 <a href="#about" class="hover:text-bronze-400 transition-colors py-1">About Us</a>
             </div>
 
-            <!-- Action Button -->
-            <div class="flex items-center gap-4">
-                <a href="#calculator" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-bronze-600 to-bronze-400 text-emerald-950 px-5 py-2.5 rounded-full font-semibold text-xs uppercase tracking-wider hover:from-bronze-500 hover:to-bronze-300 transition-all shadow-md shadow-bronze-900/20 hover:scale-105">
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleAdminModal()" class="inline-flex items-center gap-1.5 border border-bronze-400/40 text-bronze-300 px-3 py-2 rounded-full font-medium text-xs uppercase hover:bg-bronze-500/10 transition-all">
+                    <i class="fa-solid fa-lock text-[10px]"></i>
+                    <span>Admin</span>
+                </button>
+
+                <a href="#calculator" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-bronze-600 to-bronze-400 text-emerald-950 px-5 py-2 rounded-full font-semibold text-xs uppercase tracking-wider hover:from-bronze-500 hover:to-bronze-300 transition-all shadow-md">
                     <i class="fa-solid fa-calculator"></i>
                     <span>Request Quote</span>
                 </a>
-                <button class="md:hidden text-cream-100 text-xl p-2 focus:outline-none" id="mobileMenuBtn">
+
+                <button class="md:hidden text-cream-100 text-xl p-2" id="mobileMenuBtn">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
         <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-bronze-500/20 flex flex-col gap-3 text-sm font-medium text-cream-200">
-            <a href="#collections" class="hover:text-bronze-400 py-2">Collections</a>
-            <a href="#process" class="hover:text-bronze-400 py-2">Upcycling Atelier</a>
-            <a href="#calculator" class="hover:text-bronze-400 py-2">B2B Quote Calculator</a>
-            <a href="#impact" class="hover:text-bronze-400 py-2">Sustainability Impact</a>
-            <a href="#about" class="hover:text-bronze-400 py-2">About Sovereign Spaces</a>
-            <a href="#contact" class="hover:text-bronze-400 py-2">Contact & Showroom</a>
+            <a href="#collections" class="hover:text-bronze-400 py-1">Collections</a>
+            <a href="#process" class="hover:text-bronze-400 py-1">Upcycling Atelier</a>
+            <a href="#calculator" class="hover:text-bronze-400 py-1">B2B Quote Calculator</a>
+            <a href="#impact" class="hover:text-bronze-400 py-1">Sustainability Impact</a>
+            <a href="#about" class="hover:text-bronze-400 py-1">About Us</a>
+            <button onclick="toggleAdminModal()" class="text-left text-bronze-300 py-1">Admin Dashboard Login</button>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-4 overflow-hidden">
-        <!-- Ambient Lighting Effects -->
         <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-700/20 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute bottom-1/3 right-1/4 w-96 h-96 bg-bronze-600/15 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,45,31,0)_0%,rgba(2,21,14,0.85)_100%)]"></div>
 
         <div class="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
-            
-            <!-- Badge -->
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-bronze-400/30 bg-emerald-900/60 text-bronze-300 text-xs tracking-widest uppercase mb-6 backdrop-blur-md">
                 <i class="fa-solid fa-location-dot text-bronze-400"></i>
                 <span>Handcrafted in Brgy. Tangos, Baliuag City, Bulacan</span>
             </div>
 
-            <!-- Headline & Tagline -->
             <p class="font-serif-title italic text-bronze-300 text-lg sm:text-xl md:text-2xl mb-3 tracking-wide">
                 "Nothing Overlooked, Everything Elevated"
             </p>
@@ -183,492 +160,214 @@
                 Sovereign Spaces bridges superior interior luxury with verified ecological responsibility. We upcycle post-consumer glass bottle waste into high-end structural surfaces, bathroom collections, and changeable architectural chandeliers.
             </p>
 
-            <!-- Call to Action Buttons -->
             <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-12">
-                <a href="#collections" class="w-full sm:w-auto bg-gradient-to-r from-bronze-500 to-bronze-400 hover:from-bronze-400 hover:to-bronze-300 text-emerald-950 font-semibold px-8 py-4 rounded-full transition-all shadow-lg shadow-bronze-900/30 text-sm uppercase tracking-wider text-center hover:scale-105">
+                <a href="#collections" class="w-full sm:w-auto bg-gradient-to-r from-bronze-500 to-bronze-400 hover:from-bronze-400 hover:to-bronze-300 text-emerald-950 font-semibold px-8 py-4 rounded-full transition-all shadow-lg text-sm uppercase tracking-wider text-center">
                     Explore Collections
                 </a>
-                <a href="#calculator" class="w-full sm:w-auto glass-panel border border-bronze-400/40 hover:border-bronze-400 text-cream-100 font-medium px-8 py-4 rounded-full transition-all text-sm uppercase tracking-wider text-center hover:bg-emerald-900/40">
+                <a href="#calculator" class="w-full sm:w-auto glass-panel border border-bronze-400/40 hover:border-bronze-400 text-cream-100 font-medium px-8 py-4 rounded-full transition-all text-sm uppercase tracking-wider text-center">
                     B2B Custom Catalog & Quote
                 </a>
             </div>
 
-            <!-- Hero Feature Image / SVG Illustration -->
             <div class="w-full max-w-4xl rounded-2xl overflow-hidden glass-panel border border-bronze-400/30 p-2 shadow-2xl">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" class="w-full h-auto rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 380" class="w-full h-auto rounded-xl">
                     <defs>
                         <radialGradient id="heroBg" cx="50%" cy="50%" r="75%">
-                            <stop offset="0%" stop-color="#062d1f"/>
-                            <stop offset="100%" stop-color="#02150e"/>
+                            <stop offset="0%" stop-color="#062d1f"/><stop offset="100%" stop-color="#02150e"/>
                         </radialGradient>
                         <linearGradient id="heroGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#f3e5ab"/>
-                            <stop offset="50%" stop-color="#d4af37"/>
-                            <stop offset="100%" stop-color="#aa7c11"/>
+                            <stop offset="0%" stop-color="#f3e5ab"/><stop offset="50%" stop-color="#d4af37"/><stop offset="100%" stop-color="#aa7c11"/>
                         </linearGradient>
                     </defs>
-                    <rect width="1000" height="400" fill="url(#heroBg)"/>
-                    <circle cx="500" cy="200" r="180" fill="none" stroke="url(#heroGold)" stroke-width="1" stroke-dasharray="6,6" opacity="0.4"/>
-                    <circle cx="500" cy="200" r="130" fill="none" stroke="#d4af37" stroke-width="0.5" opacity="0.3"/>
-                    
-                    <!-- Upcycled Glass Mosaic Visual -->
-                    <polygon points="420,120 580,100 620,240 460,300 380,220" fill="#042217" stroke="url(#heroGold)" stroke-width="2"/>
-                    <polygon points="440,140 520,120 500,190 430,180" fill="#d4af37" opacity="0.6"/>
-                    <polygon points="530,130 570,110 600,200 520,180" fill="#104e36" stroke="#d4af37" stroke-width="0.5"/>
-                    <polygon points="450,200 510,190 540,280 470,270" fill="url(#heroGold)" opacity="0.8"/>
-                    <polygon points="520,200 590,210 570,260 500,270" fill="#f3e5ab" opacity="0.5"/>
-                    
-                    <text x="500" y="350" font-family="'Playfair Display', Georgia, serif" font-size="22" font-weight="bold" fill="#f3e5ab" text-anchor="middle" letter-spacing="2">UPCYCLED GLASS & RESIN FUNCTIONAL ART</text>
+                    <rect width="1000" height="380" fill="url(#heroBg)"/>
+                    <circle cx="500" cy="190" r="160" fill="none" stroke="url(#heroGold)" stroke-width="1" stroke-dasharray="6,6" opacity="0.4"/>
+                    <polygon points="420,100 580,80 620,220 460,280 380,200" fill="#042217" stroke="url(#heroGold)" stroke-width="2"/>
+                    <polygon points="440,120 520,100 500,170 430,160" fill="#d4af37" opacity="0.6"/>
+                    <polygon points="530,110 570,90 600,180 520,160" fill="#104e36" stroke="#d4af37" stroke-width="0.5"/>
+                    <text x="500" y="330" font-family="'Playfair Display', Georgia, serif" font-size="20" font-weight="bold" fill="#f3e5ab" text-anchor="middle" letter-spacing="2">UPCYCLED GLASS & RESIN FUNCTIONAL ART</text>
                 </svg>
             </div>
-
-            <!-- Material Spec Badges -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-16 pt-12 border-t border-bronze-500/20 w-full max-w-4xl text-center">
-                <div class="p-3">
-                    <div class="text-bronze-400 font-serif-title text-xl font-bold">100% Upcycled</div>
-                    <div class="text-xs text-cream-200/60 uppercase tracking-wider mt-1">Post-Consumer Glass</div>
-                </div>
-                <div class="p-3">
-                    <div class="text-bronze-400 font-serif-title text-xl font-bold">Non-Porous</div>
-                    <div class="text-xs text-cream-200/60 uppercase tracking-wider mt-1">Epoxy Composite Matrix</div>
-                </div>
-                <div class="p-3">
-                    <div class="text-bronze-400 font-serif-title text-xl font-bold">RA 9003</div>
-                    <div class="text-xs text-cream-200/60 uppercase tracking-wider mt-1">Circular Framework</div>
-                </div>
-                <div class="p-3">
-                    <div class="text-bronze-400 font-serif-title text-xl font-bold">B2B & B2C</div>
-                    <div class="text-xs text-cream-200/60 uppercase tracking-wider mt-1">Custom Architectural</div>
-                </div>
-            </div>
-
         </div>
     </section>
 
+    <!-- Product Collections Section -->
     <section id="collections" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
                 <span class="text-bronze-400 text-xs font-semibold uppercase tracking-[0.25em]">Curated Art & Architectural Surfaces</span>
                 <h2 class="font-serif-title text-3xl sm:text-5xl font-bold text-cream-50 mt-2">The Product Collections</h2>
             </div>
-            <!-- Filter Tabs -->
             <div class="flex items-center gap-2 mt-6 md:mt-0 p-1.5 glass-panel rounded-full border border-bronze-500/20">
-                <button onclick="filterProducts('all')" id="btn-all" class="filter-btn active px-5 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all bg-bronze-500 text-emerald-950 font-semibold">
-                    All Pieces
-                </button>
-                <button onclick="filterProducts('bathroom')" id="btn-bathroom" class="filter-btn px-5 py-2 rounded-full text-xs font-medium uppercase tracking-wider text-cream-200 hover:text-bronze-300 transition-all">
-                    Bathroom Collection
-                </button>
-                <button onclick="filterProducts('living')" id="btn-living" class="filter-btn px-5 py-2 rounded-full text-xs font-medium uppercase tracking-wider text-cream-200 hover:text-bronze-300 transition-all">
-                    Living Room Collection
-                </button>
+                <button onclick="filterProducts('all')" id="btn-all" class="filter-btn active px-5 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all bg-bronze-500 text-emerald-950 font-semibold">All Pieces</button>
+                <button onclick="filterProducts('bathroom')" id="btn-bathroom" class="filter-btn px-5 py-2 rounded-full text-xs font-medium uppercase tracking-wider text-cream-200 hover:text-bronze-300">Bathroom</button>
+                <button onclick="filterProducts('living')" id="btn-living" class="filter-btn px-5 py-2 rounded-full text-xs font-medium uppercase tracking-wider text-cream-200 hover:text-bronze-300">Living Room</button>
             </div>
         </div>
 
-        <!-- Product Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="productGrid">
-            
-            <!-- Product 1: Liquid Soap Dispenser -->
+            <!-- Product Card 1 -->
             <div class="product-card glass-card rounded-2xl overflow-hidden flex flex-col group" data-category="bathroom">
                 <div class="relative h-64 overflow-hidden bg-emerald-950 flex items-center justify-center p-2">
-                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 to-transparent z-10"></div>
-                    <!-- SVG Product Image 1 -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain relative z-0 transition-transform duration-500 group-hover:scale-105">
-                        <defs>
-                            <linearGradient id="goldCap" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#f3e5ab"/><stop offset="100%" stop-color="#a37c1e"/>
-                            </linearGradient>
-                            <linearGradient id="bodyGlass" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#104e36"/><stop offset="100%" stop-color="#02150e"/>
-                            </linearGradient>
-                        </defs>
-                        <rect x="110" y="70" width="80" height="130" rx="16" fill="url(#bodyGlass)" stroke="#d4af37" stroke-width="1.5"/>
-                        <!-- Dispenser Pump -->
-                        <path d="M 140 70 L 140 45 L 125 45 M 140 45 L 160 45 L 160 35 L 130 35" stroke="url(#goldCap)" stroke-width="5" fill="none" stroke-linecap="round"/>
-                        <!-- Crushed Glass Mosaic Inlay -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain">
+                        <rect x="110" y="70" width="80" height="130" rx="16" fill="#104e36" stroke="#d4af37" stroke-width="1.5"/>
+                        <path d="M 140 70 L 140 45 L 125 45 M 140 45 L 160 45 L 160 35 L 130 35" stroke="#d4af37" stroke-width="5" fill="none"/>
                         <polygon points="120,90 140,85 135,110 115,105" fill="#d4af37" opacity="0.8"/>
-                        <polygon points="145,95 170,90 175,130 140,120" fill="#f3e5ab" opacity="0.6"/>
-                        <polygon points="125,125 150,135 130,170 120,150" fill="#062d1f" stroke="#d4af37" stroke-width="0.5"/>
-                        <text x="150" y="190" font-family="Georgia, serif" font-size="8" fill="#d4af37" text-anchor="middle" letter-spacing="1">SOVEREIGN</text>
                     </svg>
-                    <span class="absolute top-4 left-4 z-20 text-[10px] font-semibold uppercase tracking-wider bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">
-                        Bathroom Category
-                    </span>
+                    <span class="absolute top-4 left-4 text-[10px] uppercase font-semibold bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">Bathroom</span>
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
-                        <h3 class="font-serif-title text-xl font-bold text-cream-50 group-hover:text-bronze-300 transition-colors">
-                            Upcycled Liquid Soap Dispenser
-                        </h3>
-                        <p class="text-cream-200/70 text-xs font-light mt-2 line-clamp-2">
-                            Moisture-resistant, polished stone-like or crystal finish dispenser crafted from crushed glass bottle fragments bound in thermosetting resin.
-                        </p>
+                        <h3 class="font-serif-title text-xl font-bold text-cream-50">Upcycled Liquid Soap Dispenser</h3>
+                        <p class="text-cream-200/70 text-xs mt-2">Moisture-resistant dispenser crafted from crushed glass bottle fragments bound in thermosetting resin.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-bronze-500/20 flex items-center justify-between">
                         <div>
-                            <span class="text-[10px] uppercase text-cream-200/50 block">Est. Unit Price</span>
-                            <span class="text-bronze-400 font-serif-title font-bold text-lg">₱1,250</span>
+                            <span class="text-[10px] uppercase text-cream-200/50 block">Unit Price</span>
+                            <span class="text-bronze-400 font-serif-title font-bold text-lg" id="price-dispenser">₱1,250</span>
                         </div>
-                        <button onclick="openProductModal('dispenser')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50 flex items-center gap-1 transition-colors">
-                            <span>Details</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </button>
+                        <button onclick="openProductModal('dispenser')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50">Details →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Product 2: Heavy-Duty Soap Dish -->
+            <!-- Product Card 2 -->
             <div class="product-card glass-card rounded-2xl overflow-hidden flex flex-col group" data-category="bathroom">
                 <div class="relative h-64 overflow-hidden bg-emerald-950 flex items-center justify-center p-2">
-                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 to-transparent z-10"></div>
-                    <!-- SVG Product Image 2 -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain relative z-0 transition-transform duration-500 group-hover:scale-105">
-                        <defs>
-                            <linearGradient id="dishGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#062d1f"/><stop offset="100%" stop-color="#02150e"/>
-                            </linearGradient>
-                        </defs>
-                        <!-- Soap Dish Tray -->
-                        <ellipse cx="150" cy="130" rx="90" ry="45" fill="url(#dishGrad)" stroke="#d4af37" stroke-width="2"/>
-                        <ellipse cx="150" cy="130" rx="75" ry="32" fill="#042217" stroke="#d4af37" stroke-width="0.5" stroke-dasharray="3,3"/>
-                        <!-- Recessed Glass Fragments -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain">
+                        <ellipse cx="150" cy="130" rx="90" ry="45" fill="#062d1f" stroke="#d4af37" stroke-width="2"/>
                         <polygon points="100,120 120,115 115,135 95,130" fill="#d4af37" opacity="0.7"/>
-                        <polygon points="130,130 160,120 170,140 140,145" fill="#f3e5ab" opacity="0.6"/>
-                        <polygon points="175,115 200,125 190,140 170,130" fill="#104e36" stroke="#d4af37" stroke-width="0.5"/>
                     </svg>
-                    <span class="absolute top-4 left-4 z-20 text-[10px] font-semibold uppercase tracking-wider bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">
-                        Bathroom Category
-                    </span>
+                    <span class="absolute top-4 left-4 text-[10px] uppercase font-semibold bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">Bathroom</span>
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
-                        <h3 class="font-serif-title text-xl font-bold text-cream-50 group-hover:text-bronze-300 transition-colors">
-                            Heavy-Duty Soap Dish
-                        </h3>
-                        <p class="text-cream-200/70 text-xs font-light mt-2 line-clamp-2">
-                            Engineered to withstand continuous high moisture while maintaining a polished crystal texture and dense weight.
-                        </p>
+                        <h3 class="font-serif-title text-xl font-bold text-cream-50">Heavy-Duty Soap Dish</h3>
+                        <p class="text-cream-200/70 text-xs mt-2">Engineered to withstand high moisture while maintaining a polished crystal texture and dense weight.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-bronze-500/20 flex items-center justify-between">
                         <div>
-                            <span class="text-[10px] uppercase text-cream-200/50 block">Est. Unit Price</span>
-                            <span class="text-bronze-400 font-serif-title font-bold text-lg">₱850</span>
+                            <span class="text-[10px] uppercase text-cream-200/50 block">Unit Price</span>
+                            <span class="text-bronze-400 font-serif-title font-bold text-lg" id="price-soapdish">₱850</span>
                         </div>
-                        <button onclick="openProductModal('soapdish')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50 flex items-center gap-1 transition-colors">
-                            <span>Details</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </button>
+                        <button onclick="openProductModal('soapdish')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50">Details →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Product 3: Upcycled Framed Mirror -->
+            <!-- Product Card 3 -->
             <div class="product-card glass-card rounded-2xl overflow-hidden flex flex-col group" data-category="bathroom">
                 <div class="relative h-64 overflow-hidden bg-emerald-950 flex items-center justify-center p-2">
-                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 to-transparent z-10"></div>
-                    <!-- SVG Product Image 3 -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain relative z-0 transition-transform duration-500 group-hover:scale-105">
-                        <defs>
-                            <linearGradient id="mirrorReflect" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#faf8f5" stop-opacity="0.8"/>
-                                <stop offset="50%" stop-color="#d4af37" stop-opacity="0.2"/>
-                                <stop offset="100%" stop-color="#062d1f" stop-opacity="0.9"/>
-                            </linearGradient>
-                        </defs>
-                        <!-- Mirror Outer Oval Frame -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain">
                         <ellipse cx="150" cy="120" rx="70" ry="90" fill="#042217" stroke="#d4af37" stroke-width="4"/>
-                        <!-- Inner Mirror Surface -->
-                        <ellipse cx="150" cy="120" rx="52" ry="72" fill="url(#mirrorReflect)" stroke="#f3e5ab" stroke-width="0.5"/>
-                        <!-- Frame Embedded Glass Chips -->
-                        <circle cx="150" cy="34" r="3" fill="#f3e5ab"/>
-                        <circle cx="216" cy="120" r="3" fill="#f3e5ab"/>
-                        <circle cx="150" cy="206" r="3" fill="#f3e5ab"/>
-                        <circle cx="84" cy="120" r="3" fill="#f3e5ab"/>
+                        <ellipse cx="150" cy="120" rx="52" ry="72" fill="#faf8f5" opacity="0.4"/>
                     </svg>
-                    <span class="absolute top-4 left-4 z-20 text-[10px] font-semibold uppercase tracking-wider bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">
-                        Bathroom Category
-                    </span>
+                    <span class="absolute top-4 left-4 text-[10px] uppercase font-semibold bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">Bathroom</span>
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
-                        <h3 class="font-serif-title text-xl font-bold text-cream-50 group-hover:text-bronze-300 transition-colors">
-                            Upcycled Framed Mirror
-                        </h3>
-                        <p class="text-cream-200/70 text-xs font-light mt-2 line-clamp-2">
-                            Moisture-resistant framed vanity mirror decorated with crushed amber and emerald glass bottle inlays.
-                        </p>
+                        <h3 class="font-serif-title text-xl font-bold text-cream-50">Upcycled Framed Mirror</h3>
+                        <p class="text-cream-200/70 text-xs mt-2">Moisture-resistant vanity mirror decorated with crushed amber and emerald glass inlays.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-bronze-500/20 flex items-center justify-between">
                         <div>
-                            <span class="text-[10px] uppercase text-cream-200/50 block">Est. Unit Price</span>
-                            <span class="text-bronze-400 font-serif-title font-bold text-lg">₱3,400</span>
+                            <span class="text-[10px] uppercase text-cream-200/50 block">Unit Price</span>
+                            <span class="text-bronze-400 font-serif-title font-bold text-lg" id="price-mirror">₱3,400</span>
                         </div>
-                        <button onclick="openProductModal('mirror')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50 flex items-center gap-1 transition-colors">
-                            <span>Details</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </button>
+                        <button onclick="openProductModal('mirror')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50">Details →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Product 4: Accent Wall Tiles -->
+            <!-- Product Card 4 -->
             <div class="product-card glass-card rounded-2xl overflow-hidden flex flex-col group" data-category="living">
                 <div class="relative h-64 overflow-hidden bg-emerald-950 flex items-center justify-center p-2">
-                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 to-transparent z-10"></div>
-                    <!-- SVG Product Image 4 -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain relative z-0 transition-transform duration-500 group-hover:scale-105">
-                        <g transform="translate(65, 35)">
-                            <!-- Tile Grid -->
-                            <rect x="0" y="0" width="80" height="80" fill="#062d1f" stroke="#d4af37" stroke-width="1.5" rx="4"/>
-                            <polygon points="10,10 40,20 30,50 15,40" fill="#d4af37" opacity="0.6"/>
-                            
-                            <rect x="90" y="0" width="80" height="80" fill="#042217" stroke="#d4af37" stroke-width="1.5" rx="4"/>
-                            <polygon points="110,20 150,15 140,60 105,40" fill="#104e36" stroke="#d4af37" stroke-width="0.5"/>
-                            
-                            <rect x="0" y="90" width="80" height="80" fill="#042217" stroke="#d4af37" stroke-width="1.5" rx="4"/>
-                            <polygon points="20,100 60,110 50,150 15,140" fill="#f3e5ab" opacity="0.7"/>
-                            
-                            <rect x="90" y="90" width="80" height="80" fill="#062d1f" stroke="#d4af37" stroke-width="1.5" rx="4"/>
-                            <polygon points="100,110 140,100 155,145 120,150" fill="#d4af37" opacity="0.8"/>
-                        </g>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain">
+                        <rect x="65" y="35" width="80" height="80" fill="#062d1f" stroke="#d4af37" stroke-width="1.5" rx="4"/>
+                        <rect x="155" y="35" width="80" height="80" fill="#042217" stroke="#d4af37" stroke-width="1.5" rx="4"/>
                     </svg>
-                    <span class="absolute top-4 left-4 z-20 text-[10px] font-semibold uppercase tracking-wider bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">
-                        Living Room Category
-                    </span>
+                    <span class="absolute top-4 left-4 text-[10px] uppercase font-semibold bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">Living Room</span>
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
-                        <h3 class="font-serif-title text-xl font-bold text-cream-50 group-hover:text-bronze-300 transition-colors">
-                            Architectural Accent Wall Tiles
-                        </h3>
-                        <p class="text-cream-200/70 text-xs font-light mt-2 line-clamp-2">
-                            Durable polymer-glass composite tiles designed for luxury feature walls in hotels, dining cafes, and residences.
-                        </p>
+                        <h3 class="font-serif-title text-xl font-bold text-cream-50">Architectural Accent Wall Tiles</h3>
+                        <p class="text-cream-200/70 text-xs mt-2">Durable polymer-glass composite tiles designed for luxury feature walls in hotels and cafes.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-bronze-500/20 flex items-center justify-between">
                         <div>
                             <span class="text-[10px] uppercase text-cream-200/50 block">Per Sqm Quote</span>
-                            <span class="text-bronze-400 font-serif-title font-bold text-lg">₱2,800 / sqm</span>
+                            <span class="text-bronze-400 font-serif-title font-bold text-lg" id="price-walltiles">₱2,800</span>
                         </div>
-                        <button onclick="openProductModal('walltiles')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50 flex items-center gap-1 transition-colors">
-                            <span>Details</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </button>
+                        <button onclick="openProductModal('walltiles')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50">Details →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Product 5: Eco-Luxury Glass Vase -->
+            <!-- Product Card 5 -->
             <div class="product-card glass-card rounded-2xl overflow-hidden flex flex-col group" data-category="living">
                 <div class="relative h-64 overflow-hidden bg-emerald-950 flex items-center justify-center p-2">
-                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 to-transparent z-10"></div>
-                    <!-- SVG Product Image 5 -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain relative z-0 transition-transform duration-500 group-hover:scale-105">
-                        <defs>
-                            <linearGradient id="vaseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#104e36"/><stop offset="100%" stop-color="#02150e"/>
-                            </linearGradient>
-                        </defs>
-                        <!-- Vase Silhouette -->
-                        <path d="M 120 40 C 120 40, 100 100, 90 140 C 80 180, 110 200, 150 200 C 190 200, 220 180, 210 140 C 200 100, 180 40, 180 40 Z" fill="url(#vaseGrad)" stroke="#d4af37" stroke-width="2"/>
-                        <!-- Light Reflection / Fragment Pattern -->
-                        <polygon points="120,80 145,70 140,110 115,100" fill="#d4af37" opacity="0.7"/>
-                        <polygon points="150,110 180,100 175,150 140,140" fill="#f3e5ab" opacity="0.6"/>
-                        <polygon points="110,130 135,125 140,175 115,170" fill="#062d1f" stroke="#d4af37" stroke-width="0.5"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain">
+                        <path d="M 120 40 C 120 40, 100 100, 90 140 C 80 180, 110 200, 150 200 C 190 200, 220 180, 210 140 C 200 100, 180 40, 180 40 Z" fill="#104e36" stroke="#d4af37" stroke-width="2"/>
                     </svg>
-                    <span class="absolute top-4 left-4 z-20 text-[10px] font-semibold uppercase tracking-wider bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">
-                        Living Room Category
-                    </span>
+                    <span class="absolute top-4 left-4 text-[10px] uppercase font-semibold bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">Living Room</span>
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
-                        <h3 class="font-serif-title text-xl font-bold text-cream-50 group-hover:text-bronze-300 transition-colors">
-                            Eco-Luxury Glass Vase
-                        </h3>
-                        <p class="text-cream-200/70 text-xs font-light mt-2 line-clamp-2">
-                            Light-reflecting tabletop centerpiece with embedded crushed glass fragments that shimmer in ambient light.
-                        </p>
+                        <h3 class="font-serif-title text-xl font-bold text-cream-50">Eco-Luxury Glass Vase</h3>
+                        <p class="text-cream-200/70 text-xs mt-2">Light-reflecting centerpiece with embedded crushed glass fragments that shimmer in ambient light.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-bronze-500/20 flex items-center justify-between">
                         <div>
-                            <span class="text-[10px] uppercase text-cream-200/50 block">Est. Unit Price</span>
-                            <span class="text-bronze-400 font-serif-title font-bold text-lg">₱2,100</span>
+                            <span class="text-[10px] uppercase text-cream-200/50 block">Unit Price</span>
+                            <span class="text-bronze-400 font-serif-title font-bold text-lg" id="price-vase">₱2,100</span>
                         </div>
-                        <button onclick="openProductModal('vase')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50 flex items-center gap-1 transition-colors">
-                            <span>Details</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </button>
+                        <button onclick="openProductModal('vase')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50">Details →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Product 6: Changeable Hanging Elements Chandelier -->
+            <!-- Product Card 6 -->
             <div class="product-card glass-card rounded-2xl overflow-hidden flex flex-col group" data-category="living">
                 <div class="relative h-64 overflow-hidden bg-emerald-950 flex items-center justify-center p-2">
-                    <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 to-transparent z-10"></div>
-                    <!-- SVG Product Image 6 -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain relative z-0 transition-transform duration-500 group-hover:scale-105">
-                        <!-- Ceiling Plate -->
-                        <rect x="90" y="20" width="120" height="8" rx="4" fill="#d4af37"/>
-                        <!-- Hanging Wires -->
-                        <line x1="110" y1="28" x2="110" y2="90" stroke="#d4af37" stroke-width="1"/>
-                        <line x1="135" y1="28" x2="135" y2="130" stroke="#d4af37" stroke-width="1"/>
-                        <line x1="150" y1="28" x2="150" y2="70" stroke="#d4af37" stroke-width="1"/>
-                        <line x1="165" y1="28" x2="165" y2="150" stroke="#d4af37" stroke-width="1"/>
-                        <line x1="190" y1="28" x2="190" y2="100" stroke="#d4af37" stroke-width="1"/>
-                        
-                        <!-- Pendant Crystals -->
-                        <polygon points="105,90 115,90 112,140 108,140" fill="#f3e5ab" opacity="0.8"/>
-                        <polygon points="130,130 140,130 137,190 133,190" fill="#104e36" stroke="#d4af37" stroke-width="0.5"/>
-                        <polygon points="145,70 155,70 152,110 148,110" fill="#d4af37"/>
-                        <polygon points="160,150 170,150 167,210 163,210" fill="#f3e5ab" opacity="0.9"/>
-                        <polygon points="185,100 195,100 192,160 188,160" fill="#062d1f" stroke="#d4af37" stroke-width="0.5"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" class="w-full h-full object-contain">
+                        <rect x="90" y="20" width="120" height="8" fill="#d4af37"/>
+                        <line x1="110" y1="28" x2="110" y2="120" stroke="#d4af37" stroke-width="1"/>
+                        <polygon points="105,120 115,120 112,170 108,170" fill="#f3e5ab"/>
                     </svg>
-                    <span class="absolute top-4 left-4 z-20 text-[10px] font-semibold uppercase tracking-wider bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">
-                        Flagship Lighting
-                    </span>
+                    <span class="absolute top-4 left-4 text-[10px] uppercase font-semibold bg-emerald-950/80 border border-bronze-400/30 text-bronze-300 px-3 py-1 rounded-full">Flagship</span>
                 </div>
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
-                        <h3 class="font-serif-title text-xl font-bold text-cream-50 group-hover:text-bronze-300 transition-colors">
-                            Changeable Hanging Chandelier
-                        </h3>
-                        <p class="text-cream-200/70 text-xs font-light mt-2 line-clamp-2">
-                            Handcrafted fixture featuring removable upcycled glass & epoxy elements that can be individually replaced or color-customized.
-                        </p>
+                        <h3 class="font-serif-title text-xl font-bold text-cream-50">Changeable Hanging Chandelier</h3>
+                        <p class="text-cream-200/70 text-xs mt-2">Handcrafted fixture with removable upcycled glass & epoxy elements that can be replaced or customized.</p>
                     </div>
                     <div class="mt-6 pt-4 border-t border-bronze-500/20 flex items-center justify-between">
                         <div>
                             <span class="text-[10px] uppercase text-cream-200/50 block">Custom Quote</span>
-                            <span class="text-bronze-400 font-serif-title font-bold text-lg">₱14,500+</span>
+                            <span class="text-bronze-400 font-serif-title font-bold text-lg" id="price-chandelier">₱14,500</span>
                         </div>
-                        <button onclick="openProductModal('chandelier')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50 flex items-center gap-1 transition-colors">
-                            <span>Details</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </button>
+                        <button onclick="openProductModal('chandelier')" class="text-xs uppercase font-semibold text-bronze-300 hover:text-cream-50">Details →</button>
                     </div>
                 </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="process" class="py-24 px-4 sm:px-6 lg:px-8 bg-emerald-900/30 relative border-y border-bronze-500/20">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-bronze-400 text-xs font-semibold uppercase tracking-[0.25em]">Circular Material Lifecycle</span>
-                <h2 class="font-serif-title text-3xl sm:text-5xl font-bold text-cream-50 mt-2">The Upcycling Process</h2>
-                <p class="text-cream-200/70 text-sm mt-4 font-light">
-                    How Sovereign Spaces transforms discarded municipal waste bottles in Baliuag City into ultra-durable, glossy functional art.
-                </p>
-            </div>
-
-            <!-- Workflow Steps Grid / Timeline -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Step 1 -->
-                <div class="glass-card p-8 rounded-2xl relative border-l-2 border-bronze-400">
-                    <span class="text-bronze-400 font-serif-title text-4xl font-bold block mb-4">01</span>
-                    <h3 class="font-serif-title text-xl font-bold text-cream-50 mb-2">Local Retrieval</h3>
-                    <p class="text-cream-200/70 text-xs leading-relaxed font-light">
-                        Post-consumer glass bottles and secondary streams are systematically retrieved from junk shops and local waste operators across Barangay Tangos, Baliuag City.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-bronze-500/10 text-[11px] text-bronze-300/80 flex items-center gap-2">
-                        <i class="fa-solid fa-recycle"></i>
-                        <span>Diverting Municipal Landfill Waste</span>
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="glass-card p-8 rounded-2xl relative border-l-2 border-bronze-400">
-                    <span class="text-bronze-400 font-serif-title text-4xl font-bold block mb-4">02</span>
-                    <h3 class="font-serif-title text-xl font-bold text-cream-50 mb-2">Cleaning & Sorting</h3>
-                    <p class="text-cream-200/70 text-xs leading-relaxed font-light">
-                        Glass feedstock undergoes thorough decontamination, label removal, and color classification (clear, amber, emerald green) to ensure vibrant clarity in the finished matrix.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-bronze-500/10 text-[11px] text-bronze-300/80 flex items-center gap-2">
-                        <i class="fa-solid fa-filter"></i>
-                        <span>Color Classification System</span>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="glass-card p-8 rounded-2xl relative border-l-2 border-bronze-400">
-                    <span class="text-bronze-400 font-serif-title text-4xl font-bold block mb-4">03</span>
-                    <h3 class="font-serif-title text-xl font-bold text-cream-50 mb-2">Crushing & Fragmenting</h3>
-                    <p class="text-cream-200/70 text-xs leading-relaxed font-light">
-                        Processed glass is safely crushed into controlled decorative fragments and fine reinforcement powders (&lt;108 microns) optimized for composite binding strength.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-bronze-500/10 text-[11px] text-bronze-300/80 flex items-center gap-2">
-                        <i class="fa-solid fa-hammer"></i>
-                        <span>Controlled Particle Sizing</span>
-                    </div>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="glass-card p-8 rounded-2xl relative border-l-2 border-bronze-400">
-                    <span class="text-bronze-400 font-serif-title text-4xl font-bold block mb-4">04</span>
-                    <h3 class="font-serif-title text-xl font-bold text-cream-50 mb-2">Resin Matrix Bonding</h3>
-                    <p class="text-cream-200/70 text-xs leading-relaxed font-light">
-                        Crushed particles are thoroughly blended into a high-performance, color-customized thermosetting epoxy matrix formulated for maximum flexural strength and zero porosity.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-bronze-500/10 text-[11px] text-bronze-300/80 flex items-center gap-2">
-                        <i class="fa-solid fa-flask"></i>
-                        <span>Thermosetting Polymer Network</span>
-                    </div>
-                </div>
-
-                <!-- Step 5 -->
-                <div class="glass-card p-8 rounded-2xl relative border-l-2 border-bronze-400">
-                    <span class="text-bronze-400 font-serif-title text-4xl font-bold block mb-4">05</span>
-                    <h3 class="font-serif-title text-xl font-bold text-cream-50 mb-2">Precision Molding & Curing</h3>
-                    <p class="text-cream-200/70 text-xs leading-relaxed font-light">
-                        The composite mixture is cast into specialized architectural molds, cured under controlled thermal conditions, and solidified into high-density structural art pieces.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-bronze-500/10 text-[11px] text-bronze-300/80 flex items-center gap-2">
-                        <i class="fa-solid fa-shapes"></i>
-                        <span>Custom Form Molding</span>
-                    </div>
-                </div>
-
-                <!-- Step 6 -->
-                <div class="glass-card p-8 rounded-2xl relative border-l-2 border-bronze-400">
-                    <span class="text-bronze-400 font-serif-title text-4xl font-bold block mb-4">06</span>
-                    <h3 class="font-serif-title text-xl font-bold text-cream-50 mb-2">Polishing & QC Inspection</h3>
-                    <p class="text-cream-200/70 text-xs leading-relaxed font-light">
-                        Rigorous inspection by Quality Control Inspectors to verify surface clarity, edge smooth finishes, impact durability, and aesthetic alignment prior to distribution.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-bronze-500/10 text-[11px] text-bronze-300/80 flex items-center gap-2">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>Verified Quality Benchmark</span>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
+    <!-- Calculator Section -->
     <section id="calculator" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
         <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-bronze-500/30">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <!-- Calculator Form Controls -->
                 <div class="lg:col-span-7">
                     <span class="text-bronze-400 text-xs font-semibold uppercase tracking-[0.25em]">Interactive Estimator</span>
-                    <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-cream-50 mt-2 mb-6">
-                        Custom B2B & Commercial Quote Calculator
-                    </h2>
-                    <p class="text-cream-200/70 text-xs mb-8 leading-relaxed">
-                        Tailored for cafes, hotels, interior designers, and luxury residential developments. Configure your required piece, custom epoxy resin tint, and unit quantities for an instant estimated lead time and budget project quote.
-                    </p>
-
-                    <form id="quoteForm" onsubmit="event.preventDefault(); calculateQuote();" class="space-y-6">
-                        
-                        <!-- Select Product Category -->
+                    <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-cream-50 mt-2 mb-6">Custom B2B Quote Calculator</h2>
+                    
+                    <form id="quoteForm" onsubmit="event.preventDefault(); submitQuoteRequest();" class="space-y-6">
                         <div>
-                            <label class="block text-xs uppercase tracking-wider text-cream-200/80 mb-2 font-medium">
-                                Select Product / Surface Item
-                            </label>
+                            <label class="block text-xs uppercase tracking-wider text-cream-200/80 mb-2 font-medium">Customer / Client Name</label>
+                            <input type="text" id="quoteClientName" required placeholder="e.g. Arch. Maria Santos" class="w-full bg-emerald-950/80 border border-bronze-500/40 rounded-xl px-4 py-3 text-cream-100 text-sm focus:outline-none focus:border-bronze-400">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-cream-200/80 mb-2 font-medium">Select Product Item</label>
                             <select id="quoteCategory" onchange="calculateQuote()" class="w-full bg-emerald-950/80 border border-bronze-500/40 rounded-xl px-4 py-3 text-cream-100 text-sm focus:outline-none focus:border-bronze-400">
                                 <option value="1250|Liquid Soap Dispenser">Bathroom Liquid Soap Dispenser (₱1,250 / unit)</option>
                                 <option value="850|Heavy-Duty Soap Dish">Bathroom Heavy-Duty Soap Dish (₱850 / unit)</option>
@@ -679,248 +378,50 @@
                             </select>
                         </div>
 
-                        <!-- Resin Color Tint Selection -->
                         <div>
-                            <label class="block text-xs uppercase tracking-wider text-cream-200/80 mb-2 font-medium">
-                                Epoxy Resin Custom Tint & Inlay Finish
-                            </label>
+                            <label class="block text-xs uppercase tracking-wider text-cream-200/80 mb-2 font-medium">Epoxy Resin Custom Tint</label>
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                                 <label class="cursor-pointer">
                                     <input type="radio" name="resintint" value="Emerald Green" checked onchange="calculateQuote()" class="peer hidden">
-                                    <div class="p-3 rounded-xl border border-bronze-500/30 bg-emerald-900/40 peer-checked:border-bronze-400 peer-checked:bg-emerald-800/60 transition-all flex items-center gap-2">
-                                        <span class="w-3 h-3 rounded-full bg-emerald-500 border border-emerald-300"></span>
-                                        <span class="text-xs text-cream-100">Emerald Green</span>
-                                    </div>
+                                    <div class="p-3 rounded-xl border border-bronze-500/30 bg-emerald-900/40 peer-checked:border-bronze-400 peer-checked:bg-emerald-800/60 text-xs">Emerald Green</div>
                                 </label>
-
                                 <label class="cursor-pointer">
                                     <input type="radio" name="resintint" value="Champagne Gold" onchange="calculateQuote()" class="peer hidden">
-                                    <div class="p-3 rounded-xl border border-bronze-500/30 bg-emerald-900/40 peer-checked:border-bronze-400 peer-checked:bg-emerald-800/60 transition-all flex items-center gap-2">
-                                        <span class="w-3 h-3 rounded-full bg-bronze-400 border border-yellow-200"></span>
-                                        <span class="text-xs text-cream-100">Champagne Gold</span>
-                                    </div>
+                                    <div class="p-3 rounded-xl border border-bronze-500/30 bg-emerald-900/40 peer-checked:border-bronze-400 peer-checked:bg-emerald-800/60 text-xs">Champagne Gold</div>
                                 </label>
-
                                 <label class="cursor-pointer">
                                     <input type="radio" name="resintint" value="Crystal Amber" onchange="calculateQuote()" class="peer hidden">
-                                    <div class="p-3 rounded-xl border border-bronze-500/30 bg-emerald-900/40 peer-checked:border-bronze-400 peer-checked:bg-emerald-800/60 transition-all flex items-center gap-2">
-                                        <span class="w-3 h-3 rounded-full bg-amber-600 border border-amber-300"></span>
-                                        <span class="text-xs text-cream-100">Crystal Amber</span>
-                                    </div>
-                                </label>
-
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="resintint" value="Pearl White" onchange="calculateQuote()" class="peer hidden">
-                                    <div class="p-3 rounded-xl border border-bronze-500/30 bg-emerald-900/40 peer-checked:border-bronze-400 peer-checked:bg-emerald-800/60 transition-all flex items-center gap-2">
-                                        <span class="w-3 h-3 rounded-full bg-cream-50 border border-white"></span>
-                                        <span class="text-xs text-cream-100">Pearl White</span>
-                                    </div>
-                                </label>
-
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="resintint" value="Obsidian Glass" onchange="calculateQuote()" class="peer hidden">
-                                    <div class="p-3 rounded-xl border border-bronze-500/30 bg-emerald-900/40 peer-checked:border-bronze-400 peer-checked:bg-emerald-800/60 transition-all flex items-center gap-2">
-                                        <span class="w-3 h-3 rounded-full bg-gray-900 border border-gray-600"></span>
-                                        <span class="text-xs text-cream-100">Obsidian Glass</span>
-                                    </div>
+                                    <div class="p-3 rounded-xl border border-bronze-500/30 bg-emerald-900/40 peer-checked:border-bronze-400 peer-checked:bg-emerald-800/60 text-xs">Crystal Amber</div>
                                 </label>
                             </div>
                         </div>
 
-                        <!-- Quantity Slider -->
                         <div>
                             <div class="flex justify-between items-center mb-2">
-                                <label class="text-xs uppercase tracking-wider text-cream-200/80 font-medium">
-                                    Quantity / Coverage Volume
-                                </label>
+                                <label class="text-xs uppercase tracking-wider text-cream-200/80 font-medium">Quantity Volume</label>
                                 <span id="qtyDisplay" class="text-bronze-400 font-serif-title font-bold text-base">5 Units</span>
                             </div>
                             <input type="range" id="quoteQty" min="1" max="100" value="5" oninput="calculateQuote()" class="w-full accent-bronze-400 bg-emerald-900 h-2 rounded-lg cursor-pointer">
-                            <div class="flex justify-between text-[10px] text-cream-200/50 mt-1">
-                                <span>1 Unit (Sample)</span>
-                                <span>50 Units</span>
-                                <span>100+ Units (Bulk B2B)</span>
-                            </div>
                         </div>
 
+                        <button type="submit" class="w-full bg-gradient-to-r from-bronze-500 to-bronze-400 text-emerald-950 font-bold py-3.5 rounded-xl uppercase tracking-wider text-xs shadow-md hover:from-bronze-400">
+                            Submit Official Order Inquiry
+                        </button>
                     </form>
                 </div>
 
-                <!-- Quote Summary Output Display -->
-                <div class="lg:col-span-5 bg-gradient-to-b from-emerald-900/80 to-emerald-950 p-8 rounded-2xl border border-bronze-400/40 flex flex-col justify-between shadow-2xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-bronze-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="lg:col-span-5 bg-gradient-to-b from-emerald-900/80 to-emerald-950 p-8 rounded-2xl border border-bronze-400/40 flex flex-col justify-between shadow-2xl">
                     <div>
-                        <div class="flex items-center justify-between pb-4 border-b border-bronze-500/20">
-                            <span class="text-xs uppercase tracking-widest text-bronze-300 font-medium">Estimated Proposal</span>
-                            <span class="text-[10px] bg-bronze-500/20 text-bronze-300 px-2 py-0.5 rounded border border-bronze-400/30 uppercase">Instant Estimate</span>
-                        </div>
-
+                        <span class="text-xs uppercase tracking-widest text-bronze-300 font-medium border-b border-bronze-500/20 pb-2 block">Estimated Proposal Summary</span>
                         <div class="my-6 space-y-3 text-xs">
-                            <div class="flex justify-between">
-                                <span class="text-cream-200/60">Selected Item:</span>
-                                <span id="summaryItem" class="font-medium text-cream-100 text-right">Liquid Soap Dispenser</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-cream-200/60">Resin Tint:</span>
-                                <span id="summaryTint" class="font-medium text-bronze-300">Emerald Green</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-cream-200/60">Unit Volume:</span>
-                                <span id="summaryQty" class="font-medium text-cream-100">5 Units</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-cream-200/60">Est. Lead Time:</span>
-                                <span id="summaryLead" class="font-medium text-cream-100">7-10 Business Days</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-cream-200/60">B2B Bulk Discount:</span>
-                                <span id="summaryDiscount" class="font-medium text-emerald-400">0%</span>
-                            </div>
+                            <div class="flex justify-between"><span class="text-cream-200/60">Selected Item:</span><span id="summaryItem" class="font-medium text-cream-100">Liquid Soap Dispenser</span></div>
+                            <div class="flex justify-between"><span class="text-cream-200/60">Resin Tint:</span><span id="summaryTint" class="font-medium text-bronze-300">Emerald Green</span></div>
+                            <div class="flex justify-between"><span class="text-cream-200/60">Unit Volume:</span><span id="summaryQty" class="font-medium text-cream-100">5 Units</span></div>
+                            <div class="flex justify-between"><span class="text-cream-200/60">B2B Discount:</span><span id="summaryDiscount" class="font-medium text-emerald-400">0%</span></div>
                         </div>
-
                         <div class="pt-4 border-t border-bronze-500/20">
-                            <span class="text-[10px] uppercase text-cream-200/50 block mb-1">Total Estimated Investment</span>
+                            <span class="text-[10px] uppercase text-cream-200/50 block mb-1">Total Estimated Price</span>
                             <div id="summaryTotal" class="font-serif-title font-bold text-3xl gold-gradient-text">₱6,250</div>
-                            <p class="text-[10px] text-cream-200/40 mt-1">Excludes freight delivery from Baliuag City, Bulacan.</p>
-                        </div>
-                    </div>
-
-                    <button onclick="submitQuoteRequest()" class="mt-8 w-full bg-gradient-to-r from-bronze-500 to-bronze-400 text-emerald-950 font-bold py-3.5 rounded-xl uppercase tracking-wider text-xs hover:from-bronze-400 hover:to-bronze-300 transition-all shadow-md">
-                        Submit Official Inquiry
-                    </button>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="impact" class="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-900/40 relative border-t border-bronze-500/20">
-        <div class="max-w-7xl mx-auto text-center">
-            <span class="text-bronze-400 text-xs font-semibold uppercase tracking-[0.25em]">Ecological Responsibility</span>
-            <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-cream-50 mt-2 mb-12">
-                Our Environmental Impact in Bulacan
-            </h2>
-
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Stat 1 -->
-                <div class="glass-card p-6 rounded-2xl">
-                    <div class="text-bronze-400 text-3xl mb-2"><i class="fa-solid fa-wine-bottle"></i></div>
-                    <div class="font-serif-title text-3xl sm:text-4xl font-bold text-cream-50" id="stat-bottles">15,400+</div>
-                    <div class="text-xs uppercase text-cream-200/60 tracking-wider mt-2">Glass Bottles Diverted</div>
-                </div>
-
-                <!-- Stat 2 -->
-                <div class="glass-card p-6 rounded-2xl">
-                    <div class="text-bronze-400 text-3xl mb-2"><i class="fa-solid fa-dumpster"></i></div>
-                    <div class="font-serif-title text-3xl sm:text-4xl font-bold text-cream-50" id="stat-waste">4,620 kg</div>
-                    <div class="text-xs uppercase text-cream-200/60 tracking-wider mt-2">Landfill Waste Saved</div>
-                </div>
-
-                <!-- Stat 3 -->
-                <div class="glass-card p-6 rounded-2xl">
-                    <div class="text-bronze-400 text-3xl mb-2"><i class="fa-solid fa-people-carry-box"></i></div>
-                    <div class="font-serif-title text-3xl sm:text-4xl font-bold text-cream-50">12+</div>
-                    <div class="text-xs uppercase text-cream-200/60 tracking-wider mt-2">Local Green Jobs</div>
-                </div>
-
-                <!-- Stat 4 -->
-                <div class="glass-card p-6 rounded-2xl">
-                    <div class="text-bronze-400 text-3xl mb-2"><i class="fa-solid fa-shield-halved"></i></div>
-                    <div class="font-serif-title text-3xl sm:text-4xl font-bold text-cream-50">100%</div>
-                    <div class="text-xs uppercase text-cream-200/60 tracking-wider mt-2">Non-Porous Durability</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-                <span class="text-bronze-400 text-xs font-semibold uppercase tracking-[0.25em]">Company Profile</span>
-                <h2 class="font-serif-title text-3xl sm:text-5xl font-bold text-cream-50 mt-2 mb-6">
-                    Sovereign Spaces Partnership
-                </h2>
-                <p class="text-cream-200/80 text-sm leading-relaxed font-light mb-4">
-                    Operating as a <strong>Limited Partnership</strong> based in Baliuag City, Bulacan, Sovereign Spaces combines sustainable manufacturing with operational excellence to redefine eco-luxury home decor.
-                </p>
-                <p class="text-cream-200/80 text-sm leading-relaxed font-light mb-6">
-                    Aligned with Republic Act No. 9003 (Ecological Solid Waste Management Act) and circular economy principles, our team transforms non-biodegradable waste glass into high-value functional art without energy-intensive glass remelting.
-                </p>
-
-                <div class="p-6 glass-panel rounded-2xl border border-bronze-500/20 space-y-4">
-                    <div class="flex items-start gap-4">
-                        <div class="w-8 h-8 rounded-full bg-bronze-500/20 text-bronze-400 flex items-center justify-center shrink-0 mt-1">
-                            <i class="fa-solid fa-eye text-xs"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-serif-title text-base font-bold text-cream-50">Vision Statement</h4>
-                            <p class="text-xs text-cream-200/70 font-light mt-1">
-                                To build a future where sustainability is not a compromise to luxury, but one of its defining qualities and where the most remarkable spaces are shaped by materials given a second life.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="w-8 h-8 rounded-full bg-bronze-500/20 text-bronze-400 flex items-center justify-center shrink-0 mt-1">
-                            <i class="fa-solid fa-bullseye text-xs"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-serif-title text-base font-bold text-cream-50">Mission Statement</h4>
-                            <p class="text-xs text-cream-200/70 font-light mt-1">
-                                To redefine luxury through purposeful design transforming reclaimed materials into enduring works of functional art that elevate everyday spaces while creating less waste.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Organizational Hierarchy Chart Card -->
-            <div class="glass-panel p-8 rounded-3xl border border-bronze-500/30">
-                <h3 class="font-serif-title text-xl font-bold text-cream-50 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-sitemap text-bronze-400 text-sm"></i>
-                    <span>Organizational Structure</span>
-                </h3>
-
-                <div class="space-y-4 text-xs">
-                    <div class="p-3 bg-emerald-900/60 rounded-xl border border-bronze-400/30 text-center">
-                        <span class="font-bold text-bronze-300 block">General Partners</span>
-                        <span class="text-[10px] text-cream-200/60">Operational Direction & Oversight</span>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="p-3 bg-emerald-950/60 rounded-xl border border-bronze-500/20 text-center">
-                            <span class="font-semibold text-cream-100 block">General Manager</span>
-                            <span class="text-[9px] text-cream-200/50">Overall Business Operations</span>
-                        </div>
-                        <div class="p-3 bg-emerald-950/60 rounded-xl border border-bronze-500/20 text-center">
-                            <span class="font-semibold text-cream-100 block">Operations Manager</span>
-                            <span class="text-[9px] text-cream-200/50">Supply Chain & Glass Sourcing</span>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-2">
-                        <div class="p-2.5 bg-emerald-950/40 rounded-lg text-center">
-                            <span class="font-medium text-cream-200 text-[11px] block">Marketing & Sales</span>
-                            <span class="text-[8px] text-cream-200/50">B2B Client Growth</span>
-                        </div>
-                        <div class="p-2.5 bg-emerald-950/40 rounded-lg text-center">
-                            <span class="font-medium text-cream-200 text-[11px] block">HR Officer</span>
-                            <span class="text-[8px] text-cream-200/50">Personnel & Protocols</span>
-                        </div>
-                        <div class="p-2.5 bg-emerald-950/40 rounded-lg text-center">
-                            <span class="font-medium text-cream-200 text-[11px] block">Quality Control</span>
-                            <span class="text-[8px] text-cream-200/50">Structural Verification</span>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3 pt-2">
-                        <div class="p-3 bg-emerald-900/30 rounded-xl text-center border border-emerald-800">
-                            <span class="text-bronze-300 font-medium block">Production & Waste Sorting Team</span>
-                            <span class="text-[9px] text-cream-200/60">Glass Crushing & Resin Molding</span>
-                        </div>
-                        <div class="p-3 bg-emerald-900/30 rounded-xl text-center border border-emerald-800">
-                            <span class="text-bronze-300 font-medium block">Logistics & Delivery Team</span>
-                            <span class="text-[9px] text-cream-200/60">Distribution Across Bulacan & Luzon</span>
                         </div>
                     </div>
                 </div>
@@ -928,161 +429,102 @@
         </div>
     </section>
 
-    <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="adminLoginModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-emerald-950/85 backdrop-blur-md">
+        <div class="glass-panel max-w-md w-full rounded-3xl border border-bronze-400/50 p-8 relative">
+            <button onclick="toggleAdminModal()" class="absolute top-6 right-6 text-cream-200/60 hover:text-bronze-300 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-full border border-bronze-400/60 flex items-center justify-center bg-emerald-900 mx-auto mb-3">
+                    <i class="fa-solid fa-user-shield text-bronze-400"></i>
+                </div>
+                <h3 class="font-serif-title text-2xl font-bold text-cream-50">Atelier Admin Portal</h3>
+                <p class="text-xs text-cream-200/60 mt-1">Enter password to manage orders and inventory</p>
+            </div>
+
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[11px] uppercase tracking-wider text-cream-200/70 mb-1">Passcode (Default: admin)</label>
+                    <input type="password" id="adminPassword" required placeholder="Enter passcode..." class="w-full bg-emerald-950/80 border border-bronze-500/30 rounded-xl px-4 py-3 text-xs text-cream-100 focus:outline-none focus:border-bronze-400">
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-bronze-500 to-bronze-400 text-emerald-950 font-bold py-3 rounded-xl uppercase tracking-wider text-xs">Login to Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD FULL MODAL -->
+    <div id="adminDashboardModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-emerald-950/90 backdrop-blur-lg">
+        <div class="glass-panel max-w-6xl w-full h-[90vh] rounded-3xl border border-bronze-400/50 p-6 sm:p-8 relative flex flex-col justify-between overflow-hidden">
             
-            <!-- Contact Details & Location Badge -->
-            <div class="lg:col-span-5 space-y-6">
+            <!-- Dashboard Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-bronze-500/20">
+                <div class="flex items-center gap-3">
+                    <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <h2 class="font-serif-title text-2xl font-bold text-cream-50">Sovereign Spaces Admin Portal</h2>
+                </div>
+                <button onclick="toggleAdminDashboard()" class="bg-red-500/20 border border-red-500/40 text-red-300 text-xs px-4 py-2 rounded-full uppercase">
+                    Logout
+                </button>
+            </div>
+
+            <!-- Dashboard Content Tabs -->
+            <div class="flex-1 my-6 overflow-y-auto pr-2 space-y-8">
+                
+                <!-- Stat Widgets -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="glass-card p-4 rounded-xl border border-bronze-500/30">
+                        <span class="text-[10px] uppercase text-cream-200/50 block">Total Received Orders</span>
+                        <span id="widgetOrderCount" class="font-serif-title text-2xl font-bold text-bronze-300">0</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl border border-bronze-500/30">
+                        <span class="text-[10px] uppercase text-cream-200/50 block">Est. Pipeline Value</span>
+                        <span id="widgetPipelineVal" class="font-serif-title text-2xl font-bold gold-gradient-text">₱0</span>
+                    </div>
+                    <div class="glass-card p-4 rounded-xl border border-bronze-500/30">
+                        <span class="text-[10px] uppercase text-cream-200/50 block">Catalog Products</span>
+                        <span class="font-serif-title text-2xl font-bold text-cream-100">6 Items</span>
+                    </div>
+                </div>
+
+                <!-- Orders Table -->
                 <div>
-                    <span class="text-bronze-400 text-xs font-semibold uppercase tracking-[0.25em]">Showroom & Atelier</span>
-                    <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-cream-50 mt-2">
-                        Get In Touch
-                    </h2>
-                    <p class="text-cream-200/70 text-xs mt-3 leading-relaxed">
-                        Inquire about custom residential commissions, bulk hotel/resort surfacing quotes, or schedule a visit to our Baliuag atelier.
-                    </p>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="glass-card p-4 rounded-xl flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-bronze-500/20 text-bronze-400 flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
-                        <div>
-                            <span class="text-[10px] uppercase text-cream-200/50 block">Atelier Location</span>
-                            <span class="text-xs font-semibold text-cream-100">Barangay Tangos, Baliuag City, Bulacan, Philippines</span>
-                        </div>
-                    </div>
-
-                    <div class="glass-card p-4 rounded-xl flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-bronze-500/20 text-bronze-400 flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
-                        <div>
-                            <span class="text-[10px] uppercase text-cream-200/50 block">B2B Sales Inquiry</span>
-                            <span class="text-xs font-semibold text-cream-100">inquiries@sovereignspaces.ph</span>
-                        </div>
-                    </div>
-
-                    <div class="glass-card p-4 rounded-xl flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-full bg-bronze-500/20 text-bronze-400 flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-phone"></i>
-                        </div>
-                        <div>
-                            <span class="text-[10px] uppercase text-cream-200/50 block">Operating Hours</span>
-                            <span class="text-xs font-semibold text-cream-100">Mon - Sat: 8:00 AM - 5:00 PM PHT</span>
-                        </div>
+                    <h3 class="font-serif-title text-lg font-bold text-cream-50 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-bronze-400 text-sm"></i>
+                        <span>Submitted Customer Orders & B2B Quotes</span>
+                    </h3>
+                    <div class="overflow-x-auto glass-panel rounded-xl border border-bronze-500/20">
+                        <table class="w-full text-left text-xs text-cream-200">
+                            <thead class="bg-emerald-900/80 text-bronze-300 uppercase text-[10px] border-b border-bronze-500/20">
+                                <tr>
+                                    <th class="p-3">Order ID</th>
+                                    <th class="p-3">Client</th>
+                                    <th class="p-3">Product</th>
+                                    <th class="p-3">Volume</th>
+                                    <th class="p-3">Epoxy Tint</th>
+                                    <th class="p-3">Est. Price</th>
+                                    <th class="p-3">Status</th>
+                                    <th class="p-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminOrdersTableBody" class="divide-y divide-bronze-500/10">
+                                <tr>
+                                    <td colspan="8" class="p-4 text-center text-cream-200/50">No orders recorded yet. Submit a quote from the calculator to test!</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
 
-            <!-- Interactive Contact Form -->
-            <div class="lg:col-span-7 glass-panel p-8 rounded-3xl border border-bronze-500/30">
-                <h3 class="font-serif-title text-2xl font-bold text-cream-50 mb-6">Send an Official Message</h3>
-                <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[11px] uppercase tracking-wider text-cream-200/70 mb-1">Full Name</label>
-                            <input type="text" required placeholder="e.g. Arch. Maria Santos" class="w-full bg-emerald-950/80 border border-bronze-500/30 rounded-xl px-4 py-2.5 text-xs text-cream-100 focus:outline-none focus:border-bronze-400">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] uppercase tracking-wider text-cream-200/70 mb-1">Email Address</label>
-                            <input type="email" required placeholder="maria@designstudio.ph" class="w-full bg-emerald-950/80 border border-bronze-500/30 rounded-xl px-4 py-2.5 text-xs text-cream-100 focus:outline-none focus:border-bronze-400">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[11px] uppercase tracking-wider text-cream-200/70 mb-1">Company / Establishment</label>
-                            <input type="text" placeholder="Café / Resort / Hotel Name" class="w-full bg-emerald-950/80 border border-bronze-500/30 rounded-xl px-4 py-2.5 text-xs text-cream-100 focus:outline-none focus:border-bronze-400">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] uppercase tracking-wider text-cream-200/70 mb-1">Inquiry Type</label>
-                            <select class="w-full bg-emerald-950/80 border border-bronze-500/30 rounded-xl px-4 py-2.5 text-xs text-cream-100 focus:outline-none focus:border-bronze-400">
-                                <option>Commercial B2B Partnership</option>
-                                <option>Residential Custom Order</option>
-                                <option>Showroom Appointment</option>
-                                <option>Glass Waste Disposal Supplier</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-[11px] uppercase tracking-wider text-cream-200/70 mb-1">Project Details / Message</label>
-                        <textarea rows="4" required placeholder="Describe your interior project scope, required dimensions, or custom requirements..." class="w-full bg-emerald-950/80 border border-bronze-500/30 rounded-xl px-4 py-2.5 text-xs text-cream-100 focus:outline-none focus:border-bronze-400"></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full bg-gradient-to-r from-bronze-500 to-bronze-400 text-emerald-950 font-bold py-3.5 rounded-xl uppercase tracking-wider text-xs hover:from-bronze-400 hover:to-bronze-300 transition-all shadow-md">
-                        Send Message
-                    </button>
-                </form>
-            </div>
-
-        </div>
-    </section>
-
-    <footer class="border-t border-bronze-500/20 bg-emerald-950 py-12 px-4 sm:px-6 lg:px-8 text-xs text-cream-200/60">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full border border-bronze-400/60 flex items-center justify-center bg-emerald-900">
-                    <span class="font-serif-title font-bold text-xs gold-gradient-text">SS</span>
-                </div>
-                <div>
-                    <span class="font-serif-title font-bold text-cream-50 text-sm block">SOVEREIGN SPACES</span>
-                    <span class="text-[10px]">Nothing Overlooked, Everything Elevated.</span>
-                </div>
-            </div>
-
-            <div class="text-center md:text-right text-[11px] space-y-1">
-                <p>© 2026 Sovereign Spaces Limited Partnership. All Rights Reserved.</p>
-                <p>Brgy. Tangos, Baliuag City, Bulacan • Integrated RA 9003 Upcycling Framework</p>
             </div>
         </div>
-    </footer>
+    </div>
 
+    <!-- Product Details Modal -->
     <div id="productModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-emerald-950/80 backdrop-blur-md">
-        <div class="glass-panel max-w-2xl w-full rounded-3xl border border-bronze-400/50 p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
-            
-            <button onclick="closeProductModal()" class="absolute top-6 right-6 text-cream-200/60 hover:text-bronze-300 text-xl">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="flex items-center gap-2 mb-2">
-                <span id="modalCategory" class="text-[10px] font-semibold uppercase tracking-wider bg-bronze-500/20 text-bronze-300 px-3 py-1 rounded-full border border-bronze-400/30">
-                    Category
-                </span>
-            </div>
-
-            <h3 id="modalTitle" class="font-serif-title text-2xl sm:text-3xl font-bold text-cream-50 mb-4">
-                Product Title
-            </h3>
-
-            <p id="modalDesc" class="text-cream-200/80 text-xs sm:text-sm leading-relaxed mb-6 font-light">
-                Product full description text...
-            </p>
-
-            <!-- Specification Highlights -->
-            <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="p-3 bg-emerald-950/60 rounded-xl border border-bronze-500/20">
-                    <span class="text-[10px] uppercase text-cream-200/50 block">Primary Materials</span>
-                    <span id="modalMaterials" class="text-xs font-medium text-bronze-300">Reclaimed Glass + Color Epoxy Resin</span>
-                </div>
-                <div class="p-3 bg-emerald-950/60 rounded-xl border border-bronze-500/20">
-                    <span class="text-[10px] uppercase text-cream-200/50 block">Durability Index</span>
-                    <span id="modalDurability" class="text-xs font-medium text-bronze-300">Non-Porous, High Flexural Strength</span>
-                </div>
-            </div>
-
-            <div class="flex items-center justify-between pt-4 border-t border-bronze-500/20">
-                <div>
-                    <span class="text-[10px] uppercase text-cream-200/50 block">Estimated Starting Price</span>
-                    <span id="modalPrice" class="font-serif-title font-bold text-2xl gold-gradient-text">₱0.00</span>
-                </div>
-                <a href="#calculator" onclick="closeProductModal()" class="bg-gradient-to-r from-bronze-500 to-bronze-400 text-emerald-950 font-bold px-6 py-2.5 rounded-full text-xs uppercase tracking-wider hover:from-bronze-400 hover:to-bronze-300 transition-all">
-                    Configure Quote
-                </a>
-            </div>
-
+        <div class="glass-panel max-w-xl w-full rounded-3xl border border-bronze-400/50 p-6 relative">
+            <button onclick="closeProductModal()" class="absolute top-6 right-6 text-cream-200/60 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="modalTitle" class="font-serif-title text-2xl font-bold text-cream-50 mb-2">Product Title</h3>
+            <p id="modalDesc" class="text-cream-200/80 text-xs leading-relaxed mb-4">Product full description...</p>
+            <span id="modalPrice" class="font-serif-title font-bold text-xl gold-gradient-text">₱0.00</span>
         </div>
     </div>
 
@@ -1093,169 +535,152 @@
     </div>
 
     <script>
-        // Product Modal Data Dictionary
+        // Database & State Management
+        let ordersDB = JSON.parse(localStorage.getItem('ss_orders') || '[]');
+
         const productData = {
-            dispenser: {
-                title: "Upcycled Liquid Soap Dispenser",
-                category: "Bathroom Category",
-                desc: "Engineered specifically to withstand high-humidity bathroom environments without degradation. Features a heavy-duty pump mechanism housed inside a solid resin matrix embedded with crushed clear and green glass fragments.",
-                materials: "Reclaimed Glass Bottles + Epoxy Resin Matrix",
-                durability: "Moisture-Resistant, Non-Porous Surface",
-                price: "₱1,250 per unit"
-            },
-            soapdish: {
-                title: "Heavy-Duty Soap Dish",
-                category: "Bathroom Category",
-                desc: "Cast with dense composite weight and smooth rounded edges. The non-porous finish prevents soap scum penetration and ensures long-term hygienic cleanliness.",
-                materials: "Upcycled Glass Particles + Thermosetting Polymer",
-                durability: "Waterproof, Scratch-Resistant",
-                price: "₱850 per unit"
-            },
-            mirror: {
-                title: "Upcycled Framed Vanity Mirror",
-                category: "Bathroom Category",
-                desc: "A stunning statement piece featuring a handcrafted frame filled with crushed amber bottle elements and gold leaf accents. Built for wall-mounted durability.",
-                materials: "High-Clarity Glass + Custom Inlay Frame",
-                durability: "Humidity Sealed Frame",
-                price: "₱3,400 per unit"
-            },
-            walltiles: {
-                title: "Architectural Accent Wall Tiles",
-                category: "Living Room Category",
-                desc: "Ideal for hotel lobbies, café feature walls, and luxury living rooms. Offers superior flexural strength and compressive durability compared to standard quarried stone.",
-                materials: "Recycled Glass Powder + Epoxy Matrix",
-                durability: "High Flexural Strength, Low Water Absorption",
-                price: "₱2,800 per sqm"
-            },
-            vase: {
-                title: "Eco-Luxury Tabletop Glass Vase",
-                category: "Living Room Category",
-                desc: "Designed to catch natural and interior light, creating rich refractive reflections across tabletop surfaces. Suitable for dry or liquid floral displays.",
-                materials: "Color-Tinted Reclaimed Glass Composite",
-                durability: "Impact-Resistant Solid Base",
-                price: "₱2,100 per unit"
-            },
-            chandelier: {
-                title: "Changeable Hanging Elements Chandelier",
-                category: "Flagship Lighting",
-                desc: "Our flagship lighting installation featuring individually detachable crushed glass pendants. Allows property managers or homeowners to replace single hanging elements or update colors effortlessly.",
-                materials: "Custom Resin Pendants + Metal Canopy",
-                durability: "Modular Interchangeable Design",
-                price: "₱14,500+ (Custom Scope)"
-            }
+            dispenser: { title: "Upcycled Liquid Soap Dispenser", price: "₱1,250", desc: "Heavy-duty dispenser crafted from crushed glass bottle fragments bound in resin matrix." },
+            soapdish: { title: "Heavy-Duty Soap Dish", price: "₱850", desc: "Non-porous crystal surface engineered to withstand continuous moisture." },
+            mirror: { title: "Upcycled Framed Mirror", price: "₱3,400", desc: "Vanity mirror decorated with crushed amber bottle elements and gold accents." },
+            walltiles: { title: "Accent Wall Tiles", price: "₱2,800", desc: "Polymer-glass composite tiles designed for hotel and café feature walls." },
+            vase: { title: "Eco-Luxury Glass Vase", price: "₱2,100", desc: "Light-reflecting tabletop centerpiece with embedded crushed glass." },
+            chandelier: { title: "Changeable Chandelier", price: "₱14,500", desc: "Modular fixture featuring individually detachable crushed glass pendants." }
         };
 
-        // Filter Products Function
-        function filterProducts(category) {
-            const cards = document.querySelectorAll('.product-card');
-            const btns = document.querySelectorAll('.filter-btn');
-
-            btns.forEach(btn => {
-                btn.classList.remove('bg-bronze-500', 'text-emerald-950', 'font-semibold');
-                btn.classList.add('text-cream-200');
-            });
-
-            const activeBtn = document.getElementById(`btn-${category}`);
-            if(activeBtn) {
-                activeBtn.classList.add('bg-bronze-500', 'text-emerald-950', 'font-semibold');
-                activeBtn.classList.remove('text-cream-200');
-            }
-
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+        // Filter Products
+        function filterProducts(cat) {
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.display = (cat === 'all' || card.dataset.category === cat) ? 'flex' : 'none';
             });
         }
 
-        // Open Product Modal
+        // Product Modal Logic
         function openProductModal(key) {
             const item = productData[key];
             if (!item) return;
-
             document.getElementById('modalTitle').innerText = item.title;
-            document.getElementById('modalCategory').innerText = item.category;
             document.getElementById('modalDesc').innerText = item.desc;
-            document.getElementById('modalMaterials').innerText = item.materials;
-            document.getElementById('modalDurability').innerText = item.durability;
             document.getElementById('modalPrice').innerText = item.price;
-
             document.getElementById('productModal').classList.remove('hidden');
         }
+        function closeProductModal() { document.getElementById('productModal').classList.add('hidden'); }
 
-        // Close Product Modal
-        function closeProductModal() {
-            document.getElementById('productModal').classList.add('hidden');
-        }
-
-        // Calculate B2B Quote
+        // Quote Calculator Logic
         function calculateQuote() {
-            const categorySelect = document.getElementById('quoteCategory');
-            const [basePrice, name] = categorySelect.value.split('|');
+            const select = document.getElementById('quoteCategory');
+            const [price, name] = select.value.split('|');
             const qty = parseInt(document.getElementById('quoteQty').value);
             const tint = document.querySelector('input[name="resintint"]:checked').value;
 
-            // Update Qty Display
-            document.getElementById('qtyDisplay').innerText = `${qty} ${name.includes('Tiles') ? 'Sqm' : 'Units'}`;
-
-            // Calculate Volume Discounts
-            let discount = 0;
-            if (qty >= 50) discount = 0.15; // 15% discount for 50+
-            else if (qty >= 20) discount = 0.10; // 10% discount for 20+
-            else if (qty >= 10) discount = 0.05; // 5% discount for 10+
-
-            const unitPrice = parseFloat(basePrice);
-            const subtotal = unitPrice * qty;
+            let discount = qty >= 50 ? 0.15 : (qty >= 20 ? 0.10 : (qty >= 10 ? 0.05 : 0));
+            const subtotal = parseFloat(price) * qty;
             const total = subtotal * (1 - discount);
 
-            // Lead times
-            let leadTime = "5-7 Business Days";
-            if (qty > 30) leadTime = "14-21 Business Days";
-            else if (qty > 10) leadTime = "8-12 Business Days";
-
-            // Update Summary UI
+            document.getElementById('qtyDisplay').innerText = `${qty} Units`;
             document.getElementById('summaryItem').innerText = name;
             document.getElementById('summaryTint').innerText = tint;
-            document.getElementById('summaryQty').innerText = `${qty} ${name.includes('Tiles') ? 'Sqm' : 'Units'}`;
-            document.getElementById('summaryLead').innerText = leadTime;
-            document.getElementById('summaryDiscount').innerText = `${(discount * 100)}%`;
+            document.getElementById('summaryQty').innerText = `${qty} Units`;
+            document.getElementById('summaryDiscount').innerText = `${discount * 100}%`;
             document.getElementById('summaryTotal').innerText = `₱${Math.round(total).toLocaleString()}`;
         }
 
-        // Submit Quote Request simulation
+        // Submit Quote Request (Saves to Admin Dashboard)
         function submitQuoteRequest() {
-            showToast("B2B Proposal request recorded! Our sales assistant will email you shortly.");
+            const clientName = document.getElementById('quoteClientName').value || 'Anonymous Client';
+            const [price, name] = document.getElementById('quoteCategory').value.split('|');
+            const qty = parseInt(document.getElementById('quoteQty').value);
+            const tint = document.querySelector('input[name="resintint"]:checked').value;
+            const totalText = document.getElementById('summaryTotal').innerText;
+
+            const newOrder = {
+                id: 'SS-' + Math.floor(1000 + Math.random() * 9000),
+                client: clientName,
+                product: name,
+                qty: qty,
+                tint: tint,
+                price: totalText,
+                status: 'Pending'
+            };
+
+            ordersDB.push(newOrder);
+            localStorage.setItem('ss_orders', JSON.stringify(ordersDB));
+            showToast("B2B Proposal recorded! Order ID: " + newOrder.id);
+            document.getElementById('quoteForm').reset();
+            calculateQuote();
         }
 
-        // Handle Contact Form Submit simulation
-        function handleContactSubmit(e) {
+        // Admin Auth & Modal Toggle
+        function toggleAdminModal() { document.getElementById('adminLoginModal').classList.toggle('hidden'); }
+        function toggleAdminDashboard() { document.getElementById('adminDashboardModal').classList.toggle('hidden'); }
+
+        function handleAdminLogin(e) {
             e.preventDefault();
-            showToast("Message sent successfully! Sovereign Spaces team will respond within 24 hours.");
-            e.target.reset();
+            const pass = document.getElementById('adminPassword').value;
+            if (pass === 'admin') {
+                toggleAdminModal();
+                renderAdminDashboard();
+                toggleAdminDashboard();
+            } else {
+                alert('Invalid Passcode! Hint: admin');
+            }
         }
 
-        // Show Toast Notification
+        // Render Admin Dashboard Data
+        function renderAdminDashboard() {
+            const tbody = document.getElementById('adminOrdersTableBody');
+            tbody.innerHTML = '';
+
+            let pipelineValue = 0;
+
+            if (ordersDB.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="p-4 text-center text-cream-200/50">No orders recorded yet. Submit a quote from the calculator to test!</td></tr>`;
+            } else {
+                ordersDB.forEach((order, idx) => {
+                    const numVal = parseInt(order.price.replace(/[^0-9]/g, '')) || 0;
+                    pipelineValue += numVal;
+
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-emerald-900/30">
+                            <td class="p-3 font-mono text-bronze-300">${order.id}</td>
+                            <td class="p-3 text-cream-100 font-medium">${order.client}</td>
+                            <td class="p-3">${order.product}</td>
+                            <td class="p-3">${order.qty} Units</td>
+                            <td class="p-3 text-bronze-300">${order.tint}</td>
+                            <td class="p-3 font-semibold">${order.price}</td>
+                            <td class="p-3">
+                                <span class="px-2 py-0.5 text-[9px] rounded uppercase font-bold ${order.status === 'Approved' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-amber-500/20 text-amber-300 border border-amber-500/40'}">${order.status}</span>
+                            </td>
+                            <td class="p-3">
+                                <button onclick="updateOrderStatus(${idx})" class="text-[10px] bg-bronze-500/20 text-bronze-300 border border-bronze-400/30 px-2 py-1 rounded">Approve</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            document.getElementById('widgetOrderCount').innerText = ordersDB.length;
+            document.getElementById('widgetPipelineVal').innerText = '₱' + pipelineValue.toLocaleString();
+        }
+
+        function updateOrderStatus(idx) {
+            ordersDB[idx].status = 'Approved';
+            localStorage.setItem('ss_orders', JSON.stringify(ordersDB));
+            renderAdminDashboard();
+            showToast("Order status updated!");
+        }
+
         function showToast(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
             toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 4000);
+            setTimeout(() => { toast.classList.add('hidden'); }, 4000);
         }
 
-        // Mobile Menu Toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
+            document.getElementById('mobileMenu').classList.toggle('hidden');
         });
 
-        // Initialize Calculator on Page Load
-        window.addEventListener('DOMContentLoaded', () => {
-            calculateQuote();
-        });
+        window.addEventListener('DOMContentLoaded', calculateQuote);
     </script>
 </body>
 </html>
